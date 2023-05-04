@@ -21,7 +21,11 @@
         android:id="@+id/detailPageFragment"
         android:name="com.example.contactsapp_kotlin.ui.fragment.DetailPageFragment"
         android:label="fragment_detail_page"
-        tools:layout="@layout/fragment_detail_page" />
+        tools:layout="@layout/fragment_detail_page" >
+        <argument
+            android:name="contact"
+            app:argType="com.example.contactsapp_kotlin.data.model.Contacts" />
+    </fragment>
     <fragment
         android:id="@+id/addContactFragment"
         android:name="com.example.contactsapp_kotlin.ui.fragment.AddContactFragment"
