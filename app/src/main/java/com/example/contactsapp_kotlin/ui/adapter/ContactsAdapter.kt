@@ -4,10 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contactsapp_kotlin.R
 import com.example.contactsapp_kotlin.data.model.Contacts
 import com.example.contactsapp_kotlin.databinding.ContactListItemBinding
+import com.example.contactsapp_kotlin.ui.fragment.HomePageFragmentDirections
 
 class ContactsAdapter(var mContext:Context,var contactsList:List<Contacts>)
     : RecyclerView.Adapter<ContactsAdapter.ContactListItemHolder>() {
@@ -30,5 +32,10 @@ class ContactsAdapter(var mContext:Context,var contactsList:List<Contacts>)
         val contact = contactsList.get(position)
         val t = holder.binding
         t.textViewInfo.text = "${contact.name} - ${contact.phoneNumber}"
+
+        t.cardViewContact.setOnClickListener {
+            val gecis = HomePageFragmentDirections.toDetailPage(contact=contact)
+            Navigation.findNavController(it).navigate(gecis)
+        }
     }
 }
