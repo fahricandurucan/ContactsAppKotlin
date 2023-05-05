@@ -10,8 +10,11 @@ import androidx.core.view.MenuProvider
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.contactsapp_kotlin.R
+import com.example.contactsapp_kotlin.data.model.Contacts
 import com.example.contactsapp_kotlin.databinding.FragmentHomePageBinding
+import com.example.contactsapp_kotlin.ui.adapter.ContactsAdapter
 
 class HomePageFragment : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var binding : FragmentHomePageBinding
@@ -21,6 +24,22 @@ class HomePageFragment : Fragment(), SearchView.OnQueryTextListener {
         binding.toolbarHomePage.title = "Contacts"
 
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarHomePage)
+
+
+        binding.rv.layoutManager = LinearLayoutManager(requireContext())
+        val contactList = ArrayList<Contacts>()
+        val c1 = Contacts(1,"Fahrican","05363878956")
+        val c2 = Contacts(2,"Simge","05519560101")
+        val c3 = Contacts(3,"Alya","05481287557")
+
+        contactList.add(c1)
+        contactList.add(c2)
+        contactList.add(c3)
+
+        val adapter = ContactsAdapter(requireContext(),contactList)
+        binding.rv.adapter = adapter
+
+
 
         requireActivity().addMenuProvider(object : MenuProvider{
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -39,11 +58,11 @@ class HomePageFragment : Fragment(), SearchView.OnQueryTextListener {
         },viewLifecycleOwner, Lifecycle.State.RESUMED)  //search iconu kopyalanmasın diye yazdık
 
 
-        binding.buttonDetail.setOnClickListener {
-            val contact = com.example.contactsapp_kotlin.data.model.Contacts(1,"fahrican","05364958888")
-            val gecis = HomePageFragmentDirections.toDetailPage(contact = contact)
-            Navigation.findNavController(it).navigate(gecis)
-        }
+
+
+
+
+
         binding.fab.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.toAddContact)
         }
