@@ -32,6 +32,7 @@ class ContactsAdapter(var mContext:Context,var contactsList:List<Contacts>)
         val contact = contactsList.get(position)
         val t = holder.binding
         t.textViewInfo.text = "${contact.name} - ${contact.phoneNumber}"
+        t.textViewLetter.text = "${contact.name.get(0).toUpperCase()}"
 
         t.cardViewContact.setOnClickListener {
             val gecis = HomePageFragmentDirections.toDetailPage(contact=contact)
